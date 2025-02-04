@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bird Sighting Visualization Tool</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        
+        .bg{
+            background-image: url('images/background.jpeg'); 
+            background-size: 100% 100%;
+            background-repeat: repeat; 
+            background-position: center; 
+            opacity: 0.7;
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        html, body {
+            height: 100%;
+            margin: 0; 
+            padding: 0;
+        }
+
+        h4 {
+            color: rgb(5, 4, 35);
+            text-align: center;
+            padding-top: 20px;
+            text-shadow: 4px 4px 8px #1b1414;
+            font-size: 3rem; 
+        }
+
+        p {
+            color: rgb(23, 20, 20);
+            text-align: left;
+            font-size: 18px;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+          }
+        
+          .col {
+            padding: 10px;
+            text-align: center;
+          }
+        
+          .team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background-color: rgb(120, 156, 187);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 350px; 
+          }
+        
+          .team img {
+            width: 100%;
+            max-width: 220px; /* Limit the image size */
+            border-radius: 50%;
+            margin: 10px 0;
+          }
+        
+          .team a {
+            text-decoration: none;
+            color: #061e36;
+            font-size: 14px;
+            margin: 5px; /* Space between the links */
+          }
+        
+          .team:hover {
+            box-shadow: 4px 4px 8px #1b1414;
+          }
+        
+          .team .links {
+            display: flex;
+            justify-content: center; /* Align the links side by side */
+            gap: 10px; /* Space between the links */
+          }
+
+          .motivation {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgb(120, 156, 187); 
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+          }
+
+          .datasets {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgb(120, 156, 187); 
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+          }
+        
+          .datasets .row {
+            display: flex;
+            flex-direction: column; 
+            gap: 10px; 
+          }
+          
+          .datasets ul{
+            padding-left: 50px;
+          }
+
+          .download-btn {
+            display: inline-block;
+            padding: 6px 10px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+          }
+        
+          .download-btn:hover {
+            box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15); 
+          }
+        
+          .download-btn:active {
+            transform: translateY(1px); /* Slight push down on click */
+            box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow reduction */
+          }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo.png" alt="Bird Icon" width="40" height="40" class="d-inline-block align-text-middle">
+                BirdViz
+            </a>
+            <!-- Toggler for mobile view -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Nav Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            About
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="about.html#motivation">Motivation</a></li>
+                            <li><a class="dropdown-item" href="about.html#datasets">Datasets</a></li>
+                            <li><a class="dropdown-item" href="about.html#contact">Contact</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="viz.html">Vis Tool</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="bg" id="motivation"></div>
+        <h4>Motivation</h4>
+        <div class="motivation" >
+            <p>The digital age has ushered in an era of unprecedented data availability across diverse
+                domains, including agriculture, climate studies, ecology, and healthcare. This wealth of
+                information, available in various formats such as tabular data, images, audio, and text,
+                serves as the foundation for training advanced artificial intelligence (AI) models. However,
+                the effective utilization of this data requires thorough preprocessing and careful selection
+                of relevant samples. Consequently, there is a growing need for tools that enable users to
+                visualize and comprehend data distributions effectively.
+            </p>
+            <p>
+                While human activities have often been associated with negative impacts on the natural
+                world, modern technology also offers significant potential for environmental understanding
+                and conservation. The advent of open databases allows scientists globally to share,
+                access, and analyze data collaboratively. Nevertheless, deriving meaningful insights from
+                this data remains a crucial challenge.
+            </p>
+            <p>
+                This project aims to develop a visualization tool that will enable users to explore and
+                interpret bird sightings data across selected United States ecological centers. We will
+                utilize datasets from the Macaulay Library and the National Science Foundation's National
+                Ecological Observatory Network (NEON) for our research. The proposed tool will feature an
+                interface where users can gain insights into the species of birds present in specific regions,
+                their identification methods, and general behavior through maps and associated graphics
+                that efficiently visualize data distributions.
+            </p>
+        </div>
+        <div id="datasets">
+            <h4>Datasets</h4>
+            <div class="row datasets">
+                <p>
+                    <strong class="download-btn">Macaulay Library
+                    <a href="https://ebird.org/news/macaulay-library-unveils-new-look-for-spectrograms" download>
+                        <i class="fas fa-download"></i>
+                    </a>
+                    </strong>
+                </p>
+                <p style="margin-left: 10px;">
+                    The Macaulay Library, hosted by the Cornell Lab of Ornithology, is one of the world's largest
+                    and most comprehensive repositories of wildlife media. It contains:
+                </p>
+                <ul>
+                    <li>Nearly 2.4 million sound recordings of birds</li>
+                    <li>Extensive collection of bird images and videos</li>
+                    <li>Detailed information on bird sightings</li>
+                    <li>Metadata associated with each unique bird species</li>
+                </ul>
+                <p>
+                    <strong class="download-btn">NEON Breeding Birds Dataset
+                    <a href="https://www.neonscience.org/data-collection/birds" download>
+                        <i class="fas fa-download"></i>
+                    </a>
+                    </strong>
+                </p>
+                <p style="margin-left: 10px;">
+                    The National Ecological Observatory Network (NEON) provides a standardized, long-term
+                    dataset on breeding landbirds across its network of ecological
+                    centers. This dataset includes:
+                </p>
+                <ul>
+                    <li>Bird count information collected by experienced observers</li>
+                    <li>Data from 5-15 sampling grids at most NEON field sites</li>
+                    <li>Observations made during the peak breeding season for resident birds</li>
+                    <li>Records of species, sex, and distance from observation points for each bird sighted or heard</li>
+                </ul>
+                
+                <p style="margin-left: 10px;">
+                    Key features of the NEON data collection methodology include:
+                </p>
+                <ul>
+                    <li>Six-minute point counts following a two-minute settling period</li>
+                    <li>Early morning sampling when birds are most active</li>
+                    <li>Sampling locations distributed across dominant habitat classes at each site</li>
+                </ul>
+                <div class="bg" style="margin-top: 158px; height:950px;"></div>
+            </div>
+        </div>
+        <div class="contact" id="contact">
+            <h4>Contact Us</h4>
+            <div class="row">
+                <div class="col team">
+                    <p>Anirudh Potlapally</p>
+                    <img src="images/placeholder.png" alt="Anirudh's Photo">
+                    <div class="links">
+                      <a href="your-website-link-here">Website</a>
+                      <a href="your-gmail-link-here">Gmail</a>
+                    </div>
+                  </div>
+                  <div class="col team">
+                    <p>Mona Gandhi</p>
+                    <img src="images/placeholder.png" alt="Anirudh's Photo">
+                    <div class="links">
+                      <a href="your-website-link-here">Website</a>
+                      <a href="your-gmail-link-here">Gmail</a>
+                    </div>
+                  </div>
+                  <div class="col team">
+                    <p>Suchit Gupte</p>
+                    <img src="images/placeholder.png" alt="Anirudh's Photo">
+                    <div class="links">
+                      <a href="your-website-link-here">Website</a>
+                      <a href="your-gmail-link-here">Gmail</a>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
